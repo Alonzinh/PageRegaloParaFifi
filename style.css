@@ -1,0 +1,190 @@
+:root {
+    --primary-color: #ff4f8b;
+    --secondary-color: #ff85a1;
+    --bg-gradient: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+    --shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg-gradient);
+    font-family: 'Quicksand', sans-serif;
+    overflow: hidden;
+}
+
+/* Fondo animado de corazones */
+.bg-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Contenedor Principal */
+.container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+/* Sobre */
+.envelope-wrapper {
+    position: relative;
+    width: 350px;
+    height: 230px;
+    background: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: var(--shadow);
+    margin-bottom: 50px;
+    perspective: 1000px;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #ff6497;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 2;
+}
+
+.envelope::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 115px 175px 115px 175px;
+    border-color: #ff85a1 transparent transparent #ff85a1;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.envelope::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 115px 175px 115px 175px;
+    border-color: transparent #ff99b6 #ff99b6 transparent;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+/* Solapa */
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 175px solid transparent;
+    border-right: 175px solid transparent;
+    border-top: 130px solid #ff4f8b;
+    transform-origin: top;
+    transition: transform 0.6s ease, z-index 0.6s;
+    z-index: 5;
+}
+
+/* Carta */
+.letter {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 90%;
+    background: white;
+    border-radius: 5px;
+    padding: 25px;
+    box-sizing: border-box;
+    transition: transform 0.8s ease, z-index 0.8s;
+    z-index: 1;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    overflow-y: auto;
+}
+
+.letter h1 {
+    font-size: 22px;
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+.letter p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #444;
+    margin: 10px 0;
+}
+
+.versiculo {
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.firma {
+    margin-top: 15px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Estado Abierto */
+.open .flap {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.open .letter {
+    transform: translate(-50%, -160px);
+    height: 350px;
+    z-index: 10;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* Botón */
+button {
+    padding: 15px 35px;
+    font-size: 18px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 79, 139, 0.4);
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background: #e63977;
+}
+
+/* Corazones animados */
+.heart {
+    position: absolute;
+    color: rgba(255, 79, 139, 0.4);
+    animation: float 4s infinite linear;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
